@@ -29,6 +29,9 @@ open class CachedService {
     @Cacheable("cache1")
     suspend open fun cached(a: Int): Int = a + (counter++)
 
+    @Cacheable("cache1", key = "#a.toInt()")
+    suspend open fun cachedWithSpellKeyExpr(a: Int): Int = a + (counter++)
+
     @Cacheable("cache2")
     suspend open fun delayedCached(a: Int): Int {
         delay(1)

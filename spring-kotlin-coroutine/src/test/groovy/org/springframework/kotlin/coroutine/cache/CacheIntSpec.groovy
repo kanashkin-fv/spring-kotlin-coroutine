@@ -55,6 +55,21 @@ class CacheIntSpec extends Specification {
         value == 1
     }
 
+    def "should cache direct result with key spel expression"() {
+        given:
+        runBlocking { cont ->
+            cachedService.cachedWithSpellKeyExpr(1, cont)
+        }
+
+        when:
+        def value = runBlocking { cont ->
+            cachedService.cachedWithSpellKeyExpr(1, cont)
+        }
+
+        then:
+        value == 1
+    }
+
     def "should cache callback result"() {
         given:
         runBlocking { cont ->
